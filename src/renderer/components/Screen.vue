@@ -1,25 +1,32 @@
 <template>
-  <div class="screen"></div>
+  <div class="screen">
+    <md-card>
+      <md-card-content>
+        <span class="md-display-3 screen-text" v-html="screen"></span>
+      </md-card-content>
+    </md-card>
+  </div>
 </template>
 
 <script>
   export default {
     name: 'screen',
     components: {},
-    data () {
-      return {
-
+    computed: {
+      screen () {
+        return this.$store.getters.getScreen
       }
-    },
-    methods: {
-
     }
   }
 </script>
 
 <style>
   .screen{
-    height: 80px;
-    background-color: rgba(0,0,0,0.5);
+    min-height: 80px;
+    border-radius: 0;
+  }
+
+  .screen-text{
+
   }
 </style>
