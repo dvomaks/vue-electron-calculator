@@ -126,6 +126,7 @@
     }
 </script>
 
+
 <style>
     .actions {
         background-color: cadetblue;

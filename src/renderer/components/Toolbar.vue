@@ -17,7 +17,7 @@
                 </md-button>
             </md-toolbar>
             <md-list>
-                <md-list-item v-for="item in h">
+                <md-list-item v-for="item in h" v-bind:data="item" v-bind:key="index">
                     <span v-html="item"></span>
                 </md-list-item>
             </md-list>
