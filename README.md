@@ -1,4 +1,4 @@
-# my_calc
+# vue-electron-calculator
 
 > An electron-vue project
 
