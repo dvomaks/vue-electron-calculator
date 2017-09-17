@@ -15,15 +15,28 @@ const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
 
+var windowOption
+if (process.env.NODE_ENV === 'development') {
+  windowOption = {
+    height: 950,
+    width: 400
+  }
+} else {
+  windowOption = {
+    height: 540,
+    width: 400,
+    useContentSize: true,
+    transparent: true,
+    frame: false,
+    resizable: false
+  }
+}
+
 function createWindow () {
   /**
    * Initial window options
    */
-  mainWindow = new BrowserWindow({
-    height: 563,
-    useContentSize: true,
-    width: 1000
-  })
+  mainWindow = new BrowserWindow(windowOption)
 
   mainWindow.loadURL(winURL)
 

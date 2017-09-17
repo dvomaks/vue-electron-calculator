@@ -1,48 +1,157 @@
 <template>
-    <div class="toolbar">
-        <div class="toolbar-btn-left">
-            <i class="icon-close"></i>
+    <div>
+        <md-toolbar class="toolbar">
+            <md-button class="md-icon-button no-drag" @click="appQuit">
+                <md-icon md-iconset="ion-power"></md-icon>
+            </md-button>
+            <h2 class="md-title" style="flex:1"></h2>
+            <md-button class="md-icon-button no-drag" @click="toggleMenuSidenav">
+                <md-icon md-iconset="ion-navicon-round"></md-icon>
+            </md-button>
+        </md-toolbar>
+
+        <md-sidenav class="md-right sidebar-menu" ref="menuSidenav">
+            <div class="sidebar-history-bg"
+                 :style="{
+                    'height': window.height + 'px',
+                    'margin-bottom': '-' + window.height + 'px',
+                    'background-image': 'url(static/bg/' + window.background + '.jpg)'
+                 }">
+            </div>
+            <md-toolbar>
+                <h3 class="md-title" style="flex:1">Menu</h3>
+                <md-button class="md-icon-button" @click="closeMenuSidenav">
+                    <md-icon md-iconset="ion-chevron-right"></md-icon>
+                </md-button>
+            </md-toolbar>
+
+        <div class="sidenav-content" :style="{height: window.height - 120 + 'px'}">
+            <transition name="fade" mode="out-in">
+            <md-list v-if="menu.history">
+                <md-list-item v-for="item in historyList" v-bind:data="item" v-bind:key="historyList.index">
+                    <span v-html="item"></span>
+                </md-list-item>
+            </md-list>
+                <div v-if="menu.backgrounds">
+            <md-card  v-for="(item, index) in bgList" v-bind:data="item" v-bind:key="bgList.index">
+                <md-card-media-cover md-text-scrim>
+                    <md-card-media>
+                        <img class="bg-item" :src="'static/bg/'+item+'.jpg'" :alt="item">
+                    </md-card-media>
+                    <md-card-area>
+                        <md-card-header>
+                            <div class="md-subhead">
+                                {{ item }}
+                            </div>
+                        </md-card-header>
+                        <md-card-actions>
+                            <md-button
+                                    class="md-icon-button md-raised md-primary"
+                                    :disabled="item == window.background"
+                                    @click="changeBackground(index)"
+                            >
+                                <md-icon md-iconset="ion-checkmark"></md-icon>
+                            </md-button>
+                        </md-card-actions>
+                    </md-card-area>
+                </md-card-media-cover>
+            </md-card>
+                </div>
+            </transition>
         </div>
-        <div class="toolbar-btn-right">
-            <i class="icon-menu"></i>
-        </div>
+            <md-bottom-bar class="menu-bottom-bar">
+                <md-bottom-bar-item md-iconset="ion-clock" md-active @click="showMenuContent('history')">History</md-bottom-bar-item>
+                <md-bottom-bar-item md-iconset="ion-images" @click="showMenuContent('backgrounds')">Backgrounds</md-bottom-bar-item>
+            </md-bottom-bar>
+        </md-sidenav>
+
     </div>
 </template>
 
 <script>
+  const remote = require('electron').remote
   export default {
     name: 'toolbar',
-    components: {},
     data () {
       return {
-
+        historyList: this.$store.getters.getHistory,
+        window: this.$store.getters.getWindow,
+        bgList: this.$store.getters.getBgList,
+        w: remote.getCurrentWindow(),
+        menu: {
+          history: true,
+          backgrounds: false
+        }
       }
     },
     methods: {
-
+      showMenuContent (item) {
+        for (let key in this.menu) {
+          this.menu[key] = false
+        }
+        this.menu[item] = true
+      },
+      toggleMenuSidenav () {
+        this.$refs.menuSidenav.toggle()
+      },
+      closeMenuSidenav () {
+        this.$refs.menuSidenav.close()
+      },
+      appQuit () {
+        this.w.close()
+      },
+      changeBackground (index) {
+        console.log(index)
+        this.$store.commit('setWindowBg', index)
+      }
+    },
+    computed: {
+      history () {
+        return this.$store.getters.getHistory
+      }
     }
   }
 </script>
 
 <style>
-    .toolbar{
-        height: 25px;
-        width: 300px;
-        -ms-overflow-style: scrollbar;
-        -webkit-app-region:drag;
-        padding: 10px;
+    .toolbar {
+        -webkit-user-select: none;
+        -webkit-app-region: drag;
     }
 
-    .toolbar-btn-left, .toolbar-btn-right {
-        display: inline;
-        font-size: 25px;
+    .toolbar:hover{
+        cursor: move;
     }
-    
-    .toolbar-btn-left {
-        float: left;
+
+    .no-drag {
+        -webkit-app-region: no-drag;
     }
-    
-    .toolbar-btn-right{
-        float: right;
+
+    .sidenav-content{
+        overflow-y: scroll;
+    }
+
+    .sidebar-history-bg {
+        width: 100%;
+        opacity: 0.1;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+
+    .bg-item{
+        height: 98px !important;
+        object-fit: cover;
+    }
+
+    .md-theme-default.md-list {
+        background-color: transparent !important;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s
+    }
+    .fade-enter, .fade-leave-active {
+        opacity: 0
     }
 </style>
