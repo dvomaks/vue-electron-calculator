@@ -2,11 +2,11 @@
     <div>
         <md-toolbar class="toolbar">
             <md-button class="md-icon-button no-drag" @click="appQuit">
-                <md-icon md-iconset="icon-close"></md-icon>
+                <md-icon md-iconset="ion-power"></md-icon>
             </md-button>
             <h2 class="md-title" style="flex:1"></h2>
             <md-button class="md-icon-button no-drag" @click="toggleMenuSidenav">
-                <md-icon md-iconset="icon-menu"></md-icon>
+                <md-icon md-iconset="ion-navicon-round"></md-icon>
             </md-button>
         </md-toolbar>
 
@@ -21,7 +21,7 @@
             <md-toolbar>
                 <h3 class="md-title" style="flex:1">Menu</h3>
                 <md-button class="md-icon-button" @click="closeMenuSidenav">
-                    <md-icon md-iconset="icon-arrow-right"></md-icon>
+                    <md-icon md-iconset="ion-chevron-right"></md-icon>
                 </md-button>
             </md-toolbar>
 
@@ -50,7 +50,7 @@
                                     :disabled="item == window.background"
                                     @click="changeBackground(index)"
                             >
-                                <md-icon><i class="icon-rocket"></i></md-icon>
+                                <md-icon md-iconset="ion-checkmark"></md-icon>
                             </md-button>
                         </md-card-actions>
                     </md-card-area>
@@ -60,8 +60,8 @@
             </transition>
         </div>
             <md-bottom-bar class="menu-bottom-bar">
-                <md-bottom-bar-item md-iconset="icon-hourglass" md-active @click="showMenuContent('history')">History</md-bottom-bar-item>
-                <md-bottom-bar-item md-iconset="icon-picture" @click="showMenuContent('backgrounds')">Backgrounds</md-bottom-bar-item>
+                <md-bottom-bar-item md-iconset="ion-clock" md-active @click="showMenuContent('history')">History</md-bottom-bar-item>
+                <md-bottom-bar-item md-iconset="ion-images" @click="showMenuContent('backgrounds')">Backgrounds</md-bottom-bar-item>
             </md-bottom-bar>
         </md-sidenav>
 

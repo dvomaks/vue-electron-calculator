@@ -36,7 +36,7 @@
 
 <style>
     @import "~font-roboto/dist/styles/roboto.css";
-    @import "~simple-line-icons/css/simple-line-icons.css";
+    @import "~vue-ionicons/ionicons/css/ionicons.css";
     @import "~vue-material/dist/vue-material.css";
 
     body {
