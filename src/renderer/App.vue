@@ -1,10 +1,14 @@
 <template>
-    <div id="app">
-        <div>
+    <div id="app" :style="{
+        'width': window.width + 'px',
+        'height': window.height + 'px',
+        'background-image': 'url(static/bg/' + window.background + '.jpg)'
+      }">
+
         <toolbar></toolbar>
         <screen></screen>
         <keyboard></keyboard>
-        </div>
+
     </div>
 </template>
 
@@ -15,6 +19,14 @@
 
   export default {
     name: 'my_calc',
+    data () {
+      return {
+        window: this.$store.getters.getWindow
+      }
+    },
+    created () {
+      this.$store.dispatch('fillBgList')
+    },
     components: {Toolbar, Screen, Keyboard},
     methods: {
 
@@ -27,9 +39,15 @@
     @import "~simple-line-icons/css/simple-line-icons.css";
     @import "~vue-material/dist/vue-material.css";
 
-    body,#app{
-        width: 400px;
-        height: 500px;
+    body {
+        overflow-x: hidden;
+        overflow-y: hidden;
+    }
+
+    #app{
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 
 </style>

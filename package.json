@@ -1,6 +1,6 @@
 {
   "name": "my_calc",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "author": "dvomaks <dvomaks@gmail.com>",
   "description": "An electron-vue project",
   "license": null,
@@ -54,9 +54,11 @@
   },
   "dependencies": {
     "font-roboto": "0.0.2",
+    "ionic2-material-icons": "^1.0.3",
     "simple-line-icons": "^2.4.1",
     "vue": "^2.3.3",
     "vue-electron": "^1.0.6",
+    "vue-localforage": "^0.2.5",
     "vue-material": "^0.7.5",
     "vuex": "^2.3.1"
   },
