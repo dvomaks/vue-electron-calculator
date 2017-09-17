@@ -46,6 +46,15 @@ const mutations = {
       state.num1 = ''
       state.action = ''
     }
+  },
+  backspace (state) {
+    if (state.num2 !== '') {
+      state.num2 = ''
+    } else if (state.action !== '') {
+      state.action = ''
+    } else if (state.num1 !== '') {
+      state.num1 = ''
+    }
   }
 }
 
