@@ -1,5 +1,5 @@
 {
-  "name": "my_calc",
+  "name": "vue-electron-calculator",
   "version": "0.0.2",
   "author": "dvomaks <dvomaks@gmail.com>",
   "description": "An electron-vue project",
@@ -19,14 +19,17 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "my_calc",
-    "appId": "org.simulatedgreg.electron-vue",
+    "productName": "VueElectronCalculator",
+    "appId": "com.dvomaks.${name}",
     "directories": {
       "output": "build"
     },
     "files": [
       "dist/electron/**/*"
     ],
+    "appImage":{
+      "category":"Utility"
+    },
     "dmg": {
       "contents": [
         {

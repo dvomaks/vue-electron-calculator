@@ -1,5 +1,7 @@
 # vue-electron-calculator
 
+![Screenshot](https://github.com/dvomaks/vue-electron-calculator/raw/master/screenshot.jpg)
+
 > An electron-vue project
 
 #### Build Setup

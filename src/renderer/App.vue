@@ -18,7 +18,7 @@
   import Keyboard from './components/Keyboard.vue'
 
   export default {
-    name: 'my_calc',
+    name: 'vue-electron-calculator',
     data () {
       return {
         window: this.$store.getters.getWindow
